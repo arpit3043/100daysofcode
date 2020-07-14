@@ -1,13 +1,13 @@
-#!python3
-
-from flask import Flask, render_template, request, session, redirect, url_for, escape
-import webbrowser
+from flask import Flask, render_template
+from data import health_check_data
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():	
-    return render_template("index.html")
 
-webbrowser.open('http://127.0.0.1:5000')
-app.run()
+@app.route('/')
+def index():
+    return render_template('index.html', health_data=health_check_data.get_health_data())
+
+
+if __name__ == '__main__':
+    app.run()
